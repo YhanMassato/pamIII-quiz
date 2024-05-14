@@ -6,18 +6,17 @@ export default function Home({ navigation }){
         
         <View style={{alignItems:'center'}}>
 
-            <Image source={require('../assets/logo.png')} style={{width: '90%', height: 150, marginBottom: 45}} />
+            {/*<Image source={require('../assets/logo.png')} style={{width: '90%', height: 150, marginBottom: 45}} /> */}
 
             <View style={{ marginBottom:15 }}>
                 <Button title="Adicionar Pergunta" onPress={() => navigation.navigate('Add')} />
             </View>
-{/* 
+            
             <View style={{ marginBottom:15 }}>
                 <Button title="Iniciar quiz" onPress={() => navigation.navigate('Quiz')} color={'green'} />
-            </View> */}
+            </View> 
 
-            <Button title="Editar Perguntas" onPress={()=> navigation.navigate('Edit')} color={'gold'}/
-            >
+            <Button title="Editar Perguntas" onPress={()=> navigation.navigate('Edit')} color={'gold'}/>
 
         </View>
     )

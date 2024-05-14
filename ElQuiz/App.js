@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack'
 
 import Home from './components/Home';
 import Add from './components/Add';
+import Quiz from './components/Quiz';
 
 const Stack = createStackNavigator();
 
@@ -17,17 +18,10 @@ export default function App() {
 
         <Stack.Screen name="Add" component={Add}/>
 
+        <Stack.Screen name="Quiz" component={Quiz}/>
+
       </Stack.Navigator>
 
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
