@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Alert, Button, Text, View } from 'react-native';
 import * as SQLite from 'expo-sqlite';
+import styles from './Styles'
 
 const db = SQLite.openDatabase('quiz.db');
 
@@ -38,24 +39,24 @@ export default function Quiz() {
     };
 
     return (
-        <View style={{ alignItems: 'center', width: '90%', marginStart: 'auto', marginEnd: 'auto' }}>
-            <Text style={{ fontSize: 16, marginBottom: 5, textAlign: 'justify', width: '90%' }} multiline={true}>
+        <View style={styles.quizContainer}>
+            <Text style={styles.quizPergunta} multiline={true}>
                 {pergunta}
             </Text>
             {alternativas.map((alternativa, index) => (
-                <View key={index} style={{ width: '90%', marginBottom: 15 }}>
-                    <Button
+                <View key={index} style={styles.quizButton}>
+                    <Button color={'#7d0909'}
                         title={`${String.fromCharCode(65 + index)}. ${alternativa}`}
                         onPress={() => verificarResposta(alternativa)}
                     />
                 </View>
             ))}
-            <View style={{ width: '90%', marginBottom: 15 }}>
-                <Button title="Próxima pergunta" onPress={carregarPergunta} />
+            <View style={styles.quizButton}>
+                <Button title="Próxima pergunta" onPress={carregarPergunta} color={'#c23534'}/>
             </View>
 
-            <View style={{ width: '90%', fontSize: 20 }}>
-                <Text style={{ fontSize: 20, marginLeft: "50%", marginTop:100 }}>PONTUAÇÃO: <Text style={{ color: "blue " }}>{pontuacao}</Text></Text>
+            <View style={styles.quizPontuacaoContainer}>
+                <Text style={styles.quizPontuacaoText}>PONTUAÇÃO: <Text style={styles.quizPontuacao}>{pontuacao}</Text></Text>
             </View>
 
         </View>

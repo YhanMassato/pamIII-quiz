@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Button, TextInput, View, StyleSheet, Text } from 'react-native';
+import { Alert, Button, TextInput, View, Text } from 'react-native';
 import * as SQLite from 'expo-sqlite';
+import styles from './Styles';
 
 const db = SQLite.openDatabase('quiz.db');
 
@@ -103,7 +104,7 @@ export default function Edit() {
     };
 
     return (
-        <View style={{ alignItems: 'center' }}>
+        <View style={{ alignItems: 'center', backgroundColor:'rgb(22, 13, 13)', minHeight:'100%' }}>
             <TextInput 
                 placeholder="Digite a pergunta" 
                 value={pergunta} 
@@ -143,39 +144,18 @@ export default function Edit() {
                 style={styles.alternativas} 
             />
             <View style={{ marginBottom: 15 }}>
-                <Button title="Atualizar Pergunta" onPress={atualizarPergunta} />
+                <Button title="Atualizar Pergunta" onPress={atualizarPergunta} 
+                color={'#a71d1d'}/>
             </View>
-            <Button title="Deletar Pergunta" onPress={deletarPergunta} color="red" style={{ marginBottom: 5 }} />
+            <Button title="Deletar Pergunta" onPress={deletarPergunta} color="#766a9a" style={{ marginBottom: 5 }} />
             <View style={styles.btnNB}>
-                <Button title="Voltar" onPress={perguntaAnterior} />
-                <Button title="Avançar" onPress={proximaPergunta} />
+                <Button title="Voltar" color={'#7d0909'} onPress={perguntaAnterior} />
+                <Button title="Avançar" color={'#7d0909'} onPress={proximaPergunta} />
             </View>
 
-            <View style={{ width: '90%', fontSize: 20 }}>
-                <Text style={{ fontSize: 20, marginTop:100 }}>Quantidade de Registros:<Text>{qtnPerguntas}</Text></Text>
+            <View style={styles.quizPontuacaoContainer}>
+                <Text style={styles.quizPontuacaoText}>Quantidade de Registros:<Text style={styles.qtnRegistros}>{qtnPerguntas}</Text></Text>
             </View>
         </View>
     );
 }
-
-const styles = StyleSheet.create({
-    btnNB: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: '90%' 
-    },
-    alternativas: {
-        borderColor: 'blue',
-        borderWidth: 1, 
-        marginBottom: 5, 
-        width: '90%' 
-    },
-    pergunta: {
-        height: 80,
-        borderColor: 'blue', 
-        borderWidth: 1, 
-        marginBottom: 5, 
-        width: '90%'
-    }
-});
-
