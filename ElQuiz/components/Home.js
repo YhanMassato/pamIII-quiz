@@ -16,7 +16,13 @@ export default function Home({ navigation }){
                 <Button title="Iniciar quiz" onPress={() => navigation.navigate('Quiz')} color={'green'} />
             </View> 
 
-            <Button title="Editar Perguntas" onPress={()=> navigation.navigate('Edit')} color={'gold'}/>
+            <View style={{ marginBottom:15 }}>
+                <Button title="Editar Perguntas" onPress={()=> navigation.navigate('Edit')} color={'gold'}/>
+            </View>
+
+            <View style={{ marginBottom:15 }}>
+                <Button title="Quiz 10" onPress={() => navigation.navigate('Quiz10')} color={'red'} />
+            </View> 
 
         </View>
     )

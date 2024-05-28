@@ -24,20 +24,22 @@ export default function Add(){
 
     const adicionarPergunta = () => {
         db.transaction(tx => {
-            tx.executeSql('INSERT INTO perguntas (pergunta, alternativaA, alternativaB, alternativaC, alternativaD, resposta_correta) VALUES (?, ?, ?, ?, ?);',[pergunta, alternativaA, alternativaB, alternativaC, alternativaD, respostaCorreta], (_, { insertId }) => {
-                
-                setPergunta('');
-                setAlternativaA('');
-                setAlternativaB('');
-                setAlternativaC('');
-                setAlternativaD('');
-                setRespostaCorreta('');
+            tx.executeSql(
+                'INSERT INTO perguntas (pergunta, alternativaA, alternativaB, alternativaC, alternativaD, resposta_correta) VALUES (?, ?, ?, ?, ?, ?);',
+                [pergunta, alternativaA, alternativaB, alternativaC, alternativaD, respostaCorreta],(_, { insertId }) => {
+                    setPergunta('');
+                    setAlternativaA('');
+                    setAlternativaB('');
+                    setAlternativaC('');
+                    setAlternativaD('');
+                    setRespostaCorreta('');
+                    Alert.alert('Sucesso!（￣︶￣）↗', 'Pergunta adicionada com sucesso!');
+                }
+            );
+        });
+    };
 
-                Alert.alert('Sucesso! \(@^0^@)/ ', 'Pergunta adicionada com sucesso! ლ(╹◡╹ლ)');
-            })
-        })
-    }
-
+    
 
     return(
         <View style={{alignItems:'center'}}>

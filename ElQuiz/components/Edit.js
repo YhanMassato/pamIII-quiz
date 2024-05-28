@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Alert, Button, TextInput, View } from 'react-native';
+import { Alert, Button, TextInput, View, StyleSheet, Text } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 
 const db = SQLite.openDatabase('quiz.db');
@@ -12,10 +12,21 @@ export default function Edit() {
     const [alternativaC, setAlternativaC] = useState('');
     const [alternativaD, setAlternativaD] = useState('');
     const [respostaCorreta, setRespostaCorreta] = useState('');
+    const [qtnPerguntas, setQtnPerguntas] = useState('')
 
     useEffect(() => {
         carregarPergunta();
+        contarRegistros();
     }, []);
+
+    const contarRegistros = () => {
+        db.transaction(tx => {
+            tx.executeSql('SELECT COUNT(*) FROM perguntas ', [], (_, result) => {
+                const count = result.rows.item(0)["COUNT(*)"];
+                    setQtnPerguntas(count);
+            });
+        });
+    };
 
     const carregarPergunta = () => {
         db.transaction(tx => {
@@ -99,46 +110,72 @@ export default function Edit() {
                 multiline={true} 
                 onChangeText={setPergunta} 
                 numberOfLines={4}
-                style={{ height: 80, borderColor: 'blue', borderWidth: 1, marginBottom: 5, width: '90%' }} 
+                style={styles.pergunta} 
             />
             <TextInput 
                 placeholder="Digite a alternativa A" 
                 value={alternativaA} 
                 onChangeText={setAlternativaA} 
-                style={{ borderColor: 'blue', borderWidth: 1, marginBottom: 5, width: '90%' }} 
+                style={styles.alternativas} 
             />
             <TextInput 
                 placeholder="Digite a alternativa B" 
                 value={alternativaB} 
                 onChangeText={setAlternativaB} 
-                style={{ borderColor: 'blue', borderWidth: 1, marginBottom: 5, width: '90%' }} 
+                style={styles.alternativas} 
             />
             <TextInput 
                 placeholder="Digite a alternativa C" 
                 value={alternativaC} 
                 onChangeText={setAlternativaC} 
-                style={{ borderColor: 'blue', borderWidth: 1, marginBottom: 5, width: '90%' }} 
+                style={styles.alternativas} 
             />
             <TextInput 
                 placeholder="Digite a alternativa D" 
                 value={alternativaD} 
                 onChangeText={setAlternativaD} 
-                style={{ borderColor: 'blue', borderWidth: 1, marginBottom: 5, width: '90%' }} 
+                style={styles.alternativas} 
             />
             <TextInput 
                 placeholder="Digite a letra da resposta correta" 
                 value={respostaCorreta} 
                 onChangeText={setRespostaCorreta} 
-                style={{ borderColor: 'blue', borderWidth: 1, marginBottom: 5, width: '90%' }} 
+                style={styles.alternativas} 
             />
             <View style={{ marginBottom: 15 }}>
                 <Button title="Atualizar Pergunta" onPress={atualizarPergunta} />
             </View>
             <Button title="Deletar Pergunta" onPress={deletarPergunta} color="red" style={{ marginBottom: 5 }} />
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between', width: '90%' }}>
+            <View style={styles.btnNB}>
                 <Button title="Voltar" onPress={perguntaAnterior} />
                 <Button title="Avançar" onPress={proximaPergunta} />
+            </View>
+
+            <View style={{ width: '90%', fontSize: 20 }}>
+                <Text style={{ fontSize: 20, marginTop:100 }}>Quantidade de Registros:<Text>{qtnPerguntas}</Text></Text>
             </View>
         </View>
     );
 }
+
+const styles = StyleSheet.create({
+    btnNB: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        width: '90%' 
+    },
+    alternativas: {
+        borderColor: 'blue',
+        borderWidth: 1, 
+        marginBottom: 5, 
+        width: '90%' 
+    },
+    pergunta: {
+        height: 80,
+        borderColor: 'blue', 
+        borderWidth: 1, 
+        marginBottom: 5, 
+        width: '90%'
+    }
+});
+

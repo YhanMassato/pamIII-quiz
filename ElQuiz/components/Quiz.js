@@ -5,9 +5,10 @@ import * as SQLite from 'expo-sqlite';
 const db = SQLite.openDatabase('quiz.db');
 
 export default function Quiz() {
-    const [pergunta, setPergunta] = useState('');
-    const [alternativas, setAlternativas] = useState([]);
+    const [pergunta, setPergunta] =               useState('');
+    const [alternativas, setAlternativas] =       useState([]);
     const [respostaCorreta, setRespostaCorreta] = useState('');
+    const [pontuacao, setPontuacao] =             useState(0)
 
     useEffect(() => {
         carregarPergunta();
@@ -29,6 +30,7 @@ export default function Quiz() {
     const verificarResposta = (resposta) => {
         if (resposta === respostaCorreta) {
             Alert.alert('Parabéns!', 'Você acertou a resposta!');
+            setPontuacao(pontuacao + 1)
             carregarPergunta();
         } else {
             Alert.alert('Ops!', 'Resposta incorreta.');
@@ -51,6 +53,11 @@ export default function Quiz() {
             <View style={{ width: '90%', marginBottom: 15 }}>
                 <Button title="Próxima pergunta" onPress={carregarPergunta} />
             </View>
+
+            <View style={{ width: '90%', fontSize: 20 }}>
+                <Text style={{ fontSize: 20, marginLeft: "50%", marginTop:100 }}>PONTUAÇÃO: <Text style={{ color: "blue " }}>{pontuacao}</Text></Text>
+            </View>
+
         </View>
     );
 }
