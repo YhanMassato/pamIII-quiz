@@ -3,7 +3,7 @@ import { Image, Button, TextInput, View, Alert, Text } from "react-native";
 import *  as SQLite from 'expo-sqlite';
 import styles from './Styles'
 
-const db = SQLite.openDatabase('quiz.db');
+const db = SQLite.openDatabase('quiz1.db');
 
 export default function Add(){
 

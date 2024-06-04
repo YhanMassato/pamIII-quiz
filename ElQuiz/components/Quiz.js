@@ -3,7 +3,7 @@ import { Alert, Button, Text, View } from 'react-native';
 import * as SQLite from 'expo-sqlite';
 import styles from './Styles'
 
-const db = SQLite.openDatabase('quiz.db');
+const db = SQLite.openDatabase('quiz1.db');
 
 export default function Quiz() {
     const [pergunta, setPergunta] =               useState('');
